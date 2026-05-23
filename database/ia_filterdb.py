@@ -58,21 +58,43 @@ async def save_file(media):
 
 
 
-async def get_search_results(query, file_type=None, max_results=(MAX_RIST_BTNS), offset=0, filter=False):
+async def get_search_results(query, file_type=None, max_results=(MAX_RIST_BTNS), offset=0, filter_results=False):
+    """
+    Search for files in the database.
+    
+    Args:
+        query: Search query string
+        file_type: Optional file type filter
+        max_results: Maximum number of results to return
+        offset: Pagination offset
+        filter_results: Whether to apply filtering
+    
+    Returns:
+        Tuple of (files, next_offset, total_results)
+    """
     query = query.strip()
-    if not query: raw_pattern = '.'
-    elif ' ' not in query: raw_pattern = r'(\b|[\.\+\-_])' + query + r'(\b|[\.\+\-_])'
-    else: raw_pattern = query.replace(' ', r'.*[\s\.\+\-_]')
-    try: regex = re.compile(raw_pattern, flags=re.IGNORECASE)
-    except: return [], '', 0
-    filter = {'file_name': regex}
-    if file_type: filter['file_type'] = file_type
+    if not query:
+        raw_pattern = '.'
+    elif ' ' not in query:
+        raw_pattern = r'(\b|[\.\+\-_])' + re.escape(query) + r'(\b|[\.\+\-_])'
+    else:
+        raw_pattern = re.escape(query).replace(r'\ ', r'.*[\s\.\+\-_]')
+    
+    try:
+        regex = re.compile(raw_pattern, flags=re.IGNORECASE)
+    except re.error:
+        return [], '', 0
+    
+    db_filter = {'file_name': regex}
+    if file_type:
+        db_filter['file_type'] = file_type
 
-    total_results = await Media.count_documents(filter)
+    total_results = await Media.count_documents(db_filter)
     next_offset = offset + max_results
-    if next_offset > total_results: next_offset = ''
+    if next_offset > total_results:
+        next_offset = ''
 
-    cursor = Media.find(filter)
+    cursor = Media.find(db_filter)
     # Sort by recent
     cursor.sort('$natural', -1)
     # Slice files according to offset and max results

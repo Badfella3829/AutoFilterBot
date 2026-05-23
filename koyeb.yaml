@@ -1,0 +1,55 @@
+name: autofilterbot
+type: web
+env:
+  - key: BOT_TOKEN
+    secret: true
+  - key: API_ID
+    secret: true
+  - key: API_HASH
+    secret: true
+  - key: ADMINS
+  - key: DATABASE_URL
+    secret: true
+  - key: DATABASE_NAME
+    value: AutoFilterBot
+  - key: LOG_CHANNEL
+  - key: WEB_SUPPORT
+    value: "True"
+  - key: CHANNELS
+  - key: AUTH_CHANNEL
+  - key: SUPPORT_CHAT
+    value: DevilServers
+  - key: PICS
+  - key: COLLECTION_NAME
+    value: Telegram_files
+  - key: MAX_RIST_BTNS
+    value: "10"
+  - key: IMDB
+    value: "True"
+  - key: PM_IMDB
+    value: "True"
+  - key: IMDB_DELET_TIME
+    value: "300"
+  - key: SINGLE_BUTTON
+    value: "True"
+  - key: PROTECT_CONTENT
+    value: "False"
+  - key: PMFILTER
+    value: "True"
+  - key: G_FILTER
+    value: "True"
+  - key: BUTTON_LOCK
+    value: "True"
+  - key: P_TTI_SHOW_OFF
+    value: "True"
+ports:
+  - port: 8080
+    protocol: http
+build:
+  - type: docker
+    dockerfile: Dockerfile
+run: python bot.py
+health_checks:
+  - port: 8080
+    protocol: http
+    path: /

@@ -1,72 +1,66 @@
 services:
   - type: worker
-    plan: free
     name: autofilterbot
     env: python
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python bot.py
-    repo: https://github.com/Darkksoul/AutoFilterbot.git
-    branch: main
-    autoDeploy: True
+    autoDeploy: true
     envVars:
+      # Required Variables
       - key: BOT_TOKEN
-        sync: True
+        sync: false
       - key: API_ID
-        sync: True
+        sync: false
       - key: API_HASH
-        sync: True
-      - key: FORCE_SUB
-        sync: True
-      - key: LOG_CHANNEL
-        sync: True
-      - key: DATABASE_NAME
-        sync: True
+        sync: false
+      - key: ADMINS
+        sync: false
       - key: DATABASE_URL
-        sync: True
+        sync: false
+      - key: DATABASE_NAME
+        value: AutoFilterBot
+      - key: LOG_CHANNEL
+        sync: false
+      
+      # Optional Variables
+      - key: WEB_SUPPORT
+        value: "True"
+      - key: CHANNELS
+        sync: false
+      - key: AUTH_CHANNEL
+        sync: false
+      - key: SUPPORT_CHAT
+        value: DevilServers
       - key: PICS
-        sync: True
-      - key: WEBHOOK
-        sync: True
-        - key: CHANNELS
-        sync: False
-        - key: AUTH_CHANNEL
-        sync: False
-        - key: CUSTOM_FILE_CAPTION
-        sync: False
-        - key: MAX_RIST_BTNS
-        sync: False
-        - key: COLLECTION_NAME
-        sync: True
-        - key: SUPPORT_CHAT
-        sync: True
-        - key: IMDB
-        sync: True
-        - key: PM_IMDB
-        sync: True
-        - key: IMDB_TEMPLATE
-        sync: True
-         - key: IMDB_DELET_TIME
-        sync: True
-         - key: SINGLE_BUTTON
-        sync: True
-         - key: START_MESSAGE
-        sync: True
-         - key: FORCE_SUB_TEXT
-        sync: True
-         - key: WELCOM_PIC
-        sync: True
-         - key: WELCOM_TEXT
-        sync: True
-         - key: BUTTON_LOCK_TEXT
-        sync: True
-         - key: PMFILTER
-        sync: True
-         - key: G_FILTER
-        sync: True
-         - key: BUTTON_LOCK
-        sync: True
-         - key: P_TTI_SHOW_OFF
-        sync: True
-        - key: ADMINS
-        sync: True
-             
+        sync: false
+      - key: COLLECTION_NAME
+        value: Telegram_files
+      - key: MAX_RIST_BTNS
+        value: "10"
+      - key: CUSTOM_FILE_CAPTION
+        sync: false
+      - key: IMDB
+        value: "True"
+      - key: PM_IMDB
+        value: "True"
+      - key: IMDB_TEMPLATE
+        sync: false
+      - key: IMDB_DELET_TIME
+        value: "300"
+      - key: SINGLE_BUTTON
+        value: "True"
+      - key: PROTECT_CONTENT
+        value: "False"
+      - key: PMFILTER
+        value: "True"
+      - key: G_FILTER
+        value: "True"
+      - key: BUTTON_LOCK
+        value: "True"
+      - key: P_TTI_SHOW_OFF
+        value: "True"
+      - key: SHORT_URL
+        sync: false
+      - key: SHORT_API
+        sync: false

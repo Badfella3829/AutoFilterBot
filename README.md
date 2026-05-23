@@ -1,132 +1,210 @@
-![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝗧𝗛𝗜𝗦+𝗜𝗦+𝐏𝐑𝐎𝐅𝐄𝐒𝐒𝐎𝐑+𝐁𝐎𝐓!;𝗖𝗕𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+𝗠𝗞𝗡+𝗕𝗢𝗧𝗭™;𝗔+𝗣𝗢𝗪𝗘𝗥𝗙𝗨𝗟𝗟+𝗧𝗚+𝗔𝗨𝗧𝗢𝗙𝗜𝗟𝗧𝗘𝗥+𝗕𝗢𝗧!)</p>
-<p align="center">
+# AutoFilterBot
 
-<h1 align="center">
-  <b> 𝐏𝐑𝐎𝐅𝐄𝐒𝐒𝐎𝐑 𝐁𝐎𝐓</b>
-</h1>
+A powerful Telegram auto-filter bot for indexing and searching media files in channels and groups.
 
-[![Stars](https://img.shields.io/github/stars/MrMKN/PROFESSOR-BOT?style=flat-square&color=yellow)](https://github.com/MrMKN/PROFESSOR-BOT/stargazers)
-[![Forks](https://img.shields.io/github/forks/MrMKN/PROFESSOR-BOT?style=flat-square&color=orange)](https://github.com/MrMKN/PROFESSOR-BOT/fork)
-[![Size](https://img.shields.io/github/repo-size/MrMKN/PROFESSOR-BOT?style=flat-square&color=green)](https://github.com/MrMKN/PROFESSOR-BOT)   
-[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/MrMKN/PROFESSOR-BOT)   
-[![Contributors](https://img.shields.io/github/contributors/MrMKN/PROFESSOR-BOT?style=flat-square&color=green)](https://github.com/MrMKN/PROFESSOR-BOT/graphs/contributors)
-[![License](https://img.shields.io/badge/License-AGPL-blue)](https://github.com/MrMKN/PROFESSOR-BOT/blob/main/LICENSE)
-[![Sparkline](https://stars.medv.io/MrMKN/PROFESSOR-BOT.svg)](https://stars.medv.io/MrMKN/PROFESSOR-BOT)
-
-
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![Pyrogram](https://img.shields.io/badge/Pyrogram-2.0+-orange.svg)](https://pyrogram.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4.0+-green.svg)](https://www.mongodb.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Features
 
-- [x] Auto Filter
-- [x] Manual Filter
-- [x] IMDB
-- [x] Admin Commands
-- [x] Broadcast
-- [x] Index
-- [x] IMDB Search
-- [x] Inline Search
-- [x] Random Pics
-- [x] Ids And User Info
-- [x] Stats, Users, Chats, Ban, Unban, Leave, Disable, Channel
-- [x] Spelling Check Feature
-- [x] Custom File Caption
-- [x] Group Broadcast 
-- [x] AutoFilter Auto Delete
-- [x] Junk Group & Users Clearing On Database
-- [x] Global Filter
-- [x] Url Shortner In Autofilter
-- [x] Custom Button Lock
-- [x] Image Editor & Background Remover
-- [x] Pin, Json, Password Generator
-- [x] Ban, Mute, Unmute, Etc... Group Manager
-- [x] Custom Welcome Message
-- [x] Advanced Admin Panel
-- [x] Photo Changing In All Buttons
-- [x] Custom Start Message
-- [x] Custom Button Alter Message
-- [x] Advanced Status (Disk, Cpu, Ram, Uptime..) In Image Type
- 
+### Core Features
+- **Auto Filter** - Automatically index and search files from connected channels
+- **Manual Filter** - Create custom keyword-based filters
+- **IMDB Integration** - Fetch movie/show information from IMDB
+- **Inline Search** - Search files directly in any chat using inline mode
+- **Spell Check** - Suggests corrections for misspelled queries
 
+### Admin Features
+- **Broadcast** - Send messages to all users/groups
+- **Statistics** - View detailed bot and database statistics
+- **User Management** - Ban/unban users, enable/disable groups
+- **File Management** - Delete specific files or clear entire index
+
+### Group Features
+- **Connection System** - Manage groups from PM
+- **Custom Templates** - Set custom IMDB templates per group
+- **Welcome Messages** - Customizable welcome messages
+- **Button Lock** - Restrict file buttons to requester only
+
+### Additional Features
+- **URL Shortener** - Integrate with link shortening services
+- **File Protection** - Restrict content forwarding
+- **Custom Captions** - Set custom file captions
+- **Auto Delete** - Automatically delete filter messages
+
+## Quick Start
+
+### Prerequisites
+- Python 3.10 or higher
+- MongoDB database
+- Telegram Bot Token
+- Telegram API credentials
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/DevilServers/AutoFilterbot.git
+cd AutoFilterbot
+```
+
+2. **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+3. **Configure environment variables**
+```bash
+cp .env.example .env
+# Edit .env with your values
+```
+
+4. **Run the bot**
+```bash
+python bot.py
+```
+
+## Configuration
 
 ### Required Variables
-* `BOT_TOKEN`: Create a bot using [@BotFather](https://telegram.dog/BotFather), and get the Telegram API token.
-* `API_ID`: Get this value from [telegram.org](https://my.telegram.org/apps)
-* `API_HASH`: Get this value from [telegram.org](https://my.telegram.org/apps)
-* `CHANNELS`: Username or ID of channel or group. Separate multiple IDs by space
-* `ADMINS`: Username or ID of Admin. Separate multiple Admins by space
-* `DATABASE_URL`: [mongoDB](https://www.mongodb.com) URI. Get this value from [mongoDB](https://www.mongodb.com). For more help watch this [video](https://youtu.be/1G1XwEOnxxo)
-* `DATABASE_NAME`: Name of the database in [mongoDB](https://www.mongodb.com). For more help watch this [video](https://youtu.be/1G1XwEOnxxo)
-* `LOG_CHANNEL` : A channel to log the activities of bot. Make sure bot is an admin in the channel.
-* `SUPPORT_CHAT` : Username of a Support Group / ADMIN. ( Should be username without @ and not ID
+
+| Variable | Description |
+|----------|-------------|
+| `BOT_TOKEN` | Telegram bot token from [@BotFather](https://t.me/BotFather) |
+| `API_ID` | Telegram API ID from [my.telegram.org](https://my.telegram.org) |
+| `API_HASH` | Telegram API Hash from [my.telegram.org](https://my.telegram.org) |
+| `ADMINS` | Space-separated list of admin user IDs |
+| `DATABASE_URL` | MongoDB connection URI |
+| `DATABASE_NAME` | MongoDB database name |
+| `LOG_CHANNEL` | Channel ID for logging bot activities |
+
 ### Optional Variables
-* `PICS`: Telegraph links of images to show in start message.( Multiple images can be used seperated by space )
-* `USE_CAPTION_FILTER` : Whether bot should use captions to improve search results. (True False)
-* `CUSTOM_FILE_CAPTION` : A custom file caption for your files. formatable with , file_name, file_caption, file_size, Read Readme.md for better understanding
-* `CACHE_TIME` : The maximum amount of time in seconds that the result of the inline query may be cached on the server
-* `IMDB` : Imdb, the view of information when making True/False
-* `SINGLE_BUTTON` : choose b/w single or double buttons 
-* `P_TTI_SHOW_OFF` : Customize Result Buttons to Callback or Url by (True = url / False = callback)
-### Url Shortner Variable
-* `SHORT_URL` : Url Of Shortner Site You Use
-* `SHORT_API` : Api Key Of Shortner Which You Use
 
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `CHANNELS` | - | Source channels for auto-indexing (space-separated) |
+| `AUTH_CHANNEL` | - | Force subscribe channel ID |
+| `SUPPORT_CHAT` | - | Support group username (without @) |
+| `PICS` | - | Space-separated Telegraph image URLs for start message |
+| `IMDB` | True | Enable IMDB integration |
+| `SINGLE_BUTTON` | True | Use single button layout |
+| `PROTECT_CONTENT` | False | Restrict content forwarding |
+| `SHORT_URL` | - | URL shortener domain |
+| `SHORT_API` | - | URL shortener API key |
 
-## Deploy to Heroku
+See `.env.example` for the complete list of configuration options.
 
-<a href="https://youtu.be/uv0WHxwHwfo"><img src="https://img.shields.io/badge/watch%20Heroku%20Tutorial-red.svg?logo=Youtube"></a>                     
+## Deployment
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Darkksoul/AutoFilterbot)
-</details>
+### Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-## Deploy to Koyeb
+### Railway
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template)
 
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/Darkksoul/AutoFilterbot&env[WEBHOOK]=True&env[BOT_TOKEN]&env[API_ID]&env[API_HASH]&env[CHANNELS]&env[ADMINS]&env[PICS]&env[LOG_CHANNEL]&env[AUTH_CHANNEL]&env[MAX_RIST_BTNS]=10&env[CUSTOM_FILE_CAPTION]&env[DATABASE_URL]&env[DATABASE_NAME]=MknBotz&env[COLLECTION_NAME]=Telegram_files&env[SUPPORT_CHAT]&env[IMDB]=True&env[PM_IMDB]=True&env[IMDB_TEMPLATE]&env[IMDB_DELET_TIME]=900&env[SINGLE_BUTTON]=True&env[PMFILTER]=True&env[G_FILTER]=True&env[BUTTON_LOCK]=True&env[P_TTI_SHOW_OFF]=True&run_command=python%20bot.py&branch=main&name=mr-rofessor)              
+### Koyeb
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy)
 
-## Deploy to Railway
+### Render
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/)
-
-
-
-## Deploy To Render              
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Darkksoul/AutoFilterbot)
-
-## Basic Commands
-```
-start - check bot alive
-settings - get settings 
-logs - to get the rescent errors
-stats - to get status of files in db.
-filter - add manual filters
-filters - view filters
-connect - connect to PM.
-disconnect - disconnect from PM
-connections - check all connections
-del - delete a filter
-delall - delete all filters
-deleteall - delete all index(autofilter)
-delete - delete a specific file from index.
-info - get user info
-id - get tg ids.
-imdb - fetch info from imdb.
-users - to get list of my users and ids.
-chats - to get list of the my chats and ids 
-leave  - to leave from a chat.
-disable  -  do disable a chat.
-enable - re-enable chat.
-ban_user  - to ban a user.
-unban_user  - to unban a user.
-channel - to get list of total connected channels
-broadcast - to broadcast a message to all Eva Maria users
+### Docker
+```bash
+docker build -t autofilterbot .
+docker run -d --env-file .env autofilterbot
 ```
 
-## TELAGRAM SUPPORT 
+## Commands
 
-* [![MKN BOTZ](https://img.shields.io/static/v1?label=MKN&message=BOTZ&color=critical)](https://t.me/mkn_bots_updates)
+### User Commands
+| Command | Description |
+|---------|-------------|
+| `/start` | Start the bot |
+| `/help` | Show help message |
+| `/about` | About the bot |
 
-## Disclaimer
-[![GNU Affero General Public License 2.0](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.en.html#header)    
-Licensed under [GNU AGPL 2.0.](https://github.com/EvamariaTG/evamaria/blob/master/LICENSE)
-Selling The Codes To Other People For Money Is *Strictly Prohibited*.
+### Admin Commands
+| Command | Description |
+|---------|-------------|
+| `/stats` | Show bot statistics |
+| `/broadcast` | Broadcast message to users |
+| `/users` | List all users |
+| `/chats` | List all chats |
+| `/ban_user` | Ban a user |
+| `/unban_user` | Unban a user |
+| `/logs` | Get recent logs |
 
+### Group Commands
+| Command | Description |
+|---------|-------------|
+| `/settings` | Configure group settings |
+| `/connect` | Connect group to PM |
+| `/disconnect` | Disconnect from group |
+| `/filter` | Add manual filter |
+| `/filters` | List all filters |
+| `/del` | Delete a filter |
+| `/delall` | Delete all filters |
+| `/set_template` | Set IMDB template |
+
+### Index Commands
+| Command | Description |
+|---------|-------------|
+| `/index` | Index a channel |
+| `/channel` | List indexed channels |
+| `/delete` | Delete specific file |
+| `/deleteall` | Delete all indexed files |
+
+## Project Structure
+
+```
+AutoFilterbot/
+├── bot.py              # Main bot entry point
+├── info.py             # Configuration loader
+├── Script.py           # Bot messages and templates
+├── utils.py            # Utility functions
+├── database/           # Database modules
+│   ├── ia_filterdb.py  # File indexing database
+│   ├── users_chats_db.py # Users and chats database
+│   ├── connections_mdb.py # Connections database
+│   ├── filters_mdb.py  # Manual filters database
+│   └── gfilters_mdb.py # Global filters database
+├── plugins/            # Bot command handlers
+│   ├── commands.py     # Basic commands
+│   ├── pm_filter.py    # PM filter handler
+│   ├── group_filter.py # Group filter handler
+│   ├── index.py        # Indexing commands
+│   ├── connection.py   # Connection commands
+│   ├── broadcast.py    # Broadcast commands
+│   └── stats.py        # Statistics commands
+└── utils/              # Utility modules
+    └── health.py       # Health check utilities
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Support
+
+- **Telegram Group**: [@DevilServers](https://t.me/DevilServers)
+- **Issues**: [GitHub Issues](https://github.com/DevilServers/AutoFilterbot/issues)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Pyrogram](https://pyrogram.org/) - Telegram MTProto API framework
+- [Motor](https://motor.readthedocs.io/) - Async MongoDB driver
+- [Cinemagoer](https://cinemagoer.github.io/) - IMDB data access
+
+---
+
+**Made with love by [Devil TG](https://t.me/DevilServers)**

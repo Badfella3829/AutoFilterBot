@@ -1,4 +1,4 @@
-import os, math, logging, datetime, pytz, logging.config
+import os, math, logging, datetime, pytz, logging.config, asyncio, threading
 
 from aiohttp import web
 from pyrogram import Client, types
@@ -14,6 +14,29 @@ logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("cinemagoer").setLevel(logging.ERROR)
 logger = logging.getLogger(__name__)
 
+
+# Standalone web server for healthcheck - runs independently
+async def start_web_server():
+    """Start web server immediately for Railway healthcheck."""
+    app = web.Application(client_max_size=30000000)
+    
+    async def home(request):
+        return web.Response(text="Bot is running!", content_type="text/plain")
+    
+    async def health(request):
+        return web.Response(text="OK", content_type="text/plain")
+    
+    app.router.add_get("/", home)
+    app.router.add_get("/health", health)
+    
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", 8080)
+    await site.start()
+    logger.info("Web Server Started on port 8080")
+    return runner
+
+
 class Bot(Client):
 
     def __init__(self):
@@ -28,25 +51,7 @@ class Bot(Client):
         )
 
     async def start(self):
-        # Start Web Server FIRST for healthcheck (before bot initialization)
-        if WEB_SUPPORT:
-            app = web.Application(client_max_size=30000000)
-            
-            async def home(request):
-                return web.Response(text="Bot is running!", content_type="text/plain")
-            
-            async def health(request):
-                return web.Response(text="OK", content_type="text/plain")
-            
-            app.router.add_get("/", home)
-            app.router.add_get("/health", health)
-            
-            runner = web.AppRunner(app)
-            await runner.setup()
-            await web.TCPSite(runner, "0.0.0.0", 8080).start()
-            logger.info("Web Server Started on port 8080")
-        
-        # Now initialize bot
+        # Initialize bot
         b_users, b_chats = await db.get_banned()
         temp.BANNED_USERS = b_users
         temp.BANNED_CHATS = b_chats        
@@ -87,4 +92,21 @@ class Bot(Client):
                 yield message
                 current += 1
 
-Bot().run()
+
+async def main():
+    """Main function to start web server first, then bot."""
+    # Start web server FIRST for healthcheck
+    if WEB_SUPPORT:
+        await start_web_server()
+    
+    # Now start the bot
+    bot = Bot()
+    await bot.start()
+    logger.info("Bot Started Successfully!")
+    
+    # Keep running
+    await asyncio.Event().wait()
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

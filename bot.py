@@ -28,6 +28,25 @@ class Bot(Client):
         )
 
     async def start(self):
+        # Start Web Server FIRST for healthcheck (before bot initialization)
+        if WEB_SUPPORT:
+            app = web.Application(client_max_size=30000000)
+            
+            async def home(request):
+                return web.Response(text="Bot is running!", content_type="text/plain")
+            
+            async def health(request):
+                return web.Response(text="OK", content_type="text/plain")
+            
+            app.router.add_get("/", home)
+            app.router.add_get("/health", health)
+            
+            runner = web.AppRunner(app)
+            await runner.setup()
+            await web.TCPSite(runner, "0.0.0.0", 8080).start()
+            logger.info("Web Server Started on port 8080")
+        
+        # Now initialize bot
         b_users, b_chats = await db.get_banned()
         temp.BANNED_USERS = b_users
         temp.BANNED_CHATS = b_chats        
@@ -52,20 +71,6 @@ class Bot(Client):
             await self.send_message(LOG_CHANNEL, text=LOG_MSG.format(me.first_name, date, tame, __repo__, __version__, __license__, __copyright__), disable_web_page_preview=True)   
         except Exception as e: 
             logger.warning(f"Bot Isn't Able To Send Message To LOG_CHANNEL \n{e}")
-
-        # Web Server Setup with Route
-        if WEB_SUPPORT:
-            app = web.Application(client_max_size=30000000)
-            
-            async def home(request):
-                return web.Response(text="Bot is running!", content_type="text/plain")
-            
-            app.router.add_get("/", home)  # Route added
-            
-            runner = web.AppRunner(app)
-            await runner.setup()
-            await web.TCPSite(runner, "0.0.0.0", 8080).start()
-            logger.info("Web Response Is Running...")
             
     async def stop(self, *args):
         await super().stop()

@@ -1,4 +1,5 @@
 import pymongo
+import certifi
 
 from info import DATABASE_URL, DATABASE_NAME
 
@@ -8,8 +9,7 @@ logger.setLevel(logging.ERROR)
 
 myclient = pymongo.MongoClient(
     DATABASE_URL,
-    tls=True,
-    tlsAllowInvalidCertificates=True,
+    tlsCAFile=certifi.where(),
     serverSelectionTimeoutMS=30000,
     connectTimeoutMS=30000
 )

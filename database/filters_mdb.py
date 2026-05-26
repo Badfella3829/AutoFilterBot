@@ -1,4 +1,5 @@
 import pymongo
+import certifi
 from pyrogram import enums 
 from info import DATABASE_URL, DATABASE_NAME
 import logging
@@ -7,8 +8,7 @@ logger.setLevel(logging.ERROR)
 
 myclient = pymongo.MongoClient(
     DATABASE_URL,
-    tls=True,
-    tlsAllowInvalidCertificates=True,
+    tlsCAFile=certifi.where(),
     serverSelectionTimeoutMS=30000,
     connectTimeoutMS=30000
 )

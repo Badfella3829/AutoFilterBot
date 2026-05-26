@@ -2,7 +2,6 @@ import logging
 from struct import pack
 import re
 import base64
-import certifi
 from pyrogram.file_id import FileId
 from pymongo.errors import DuplicateKeyError
 from umongo import Instance, Document, fields
@@ -14,12 +13,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-client = AsyncIOMotorClient(
-    FILE_DB_URL,
-    tlsCAFile=certifi.where(),
-    serverSelectionTimeoutMS=30000,
-    connectTimeoutMS=30000
-)
+client = AsyncIOMotorClient(FILE_DB_URL)
 db = client[FILE_DB_NAME]
 instance = Instance.from_db(db)
 

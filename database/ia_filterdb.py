@@ -13,7 +13,13 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-client = AsyncIOMotorClient(FILE_DB_URL)
+client = AsyncIOMotorClient(
+    FILE_DB_URL,
+    tls=True,
+    tlsAllowInvalidCertificates=True,
+    serverSelectionTimeoutMS=30000,
+    connectTimeoutMS=30000
+)
 db = client[FILE_DB_NAME]
 instance = Instance.from_db(db)
 

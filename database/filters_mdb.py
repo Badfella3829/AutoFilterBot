@@ -5,7 +5,13 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
-myclient = pymongo.MongoClient(DATABASE_URL)
+myclient = pymongo.MongoClient(
+    DATABASE_URL,
+    tls=True,
+    tlsAllowInvalidCertificates=True,
+    serverSelectionTimeoutMS=30000,
+    connectTimeoutMS=30000
+)
 mydb = myclient["ManualFilters"]
 
 
